@@ -4,6 +4,12 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
 
+import sys
+import os
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from app.queries import (
     get_transactions,
     get_summary,
@@ -16,7 +22,7 @@ from app.queries import (
 st.set_page_config(page_title="Expense Tracker", layout="wide", page_icon="💰")
 
 def format_currency(value):
-    return f"${value:,.2f}"
+    return f"{value:,.0f} VND"
 
 def main():
     st.title("💰 Expense Tracker")

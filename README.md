@@ -1,81 +1,58 @@
-# Expense Tracker
+# Expense Tracker (Terminal + LLM)
 
-Discord bot for recording expenses and income, with Streamlit dashboard.
+Track expenses via terminal using a local LLM (LM Studio).
 
 ## Setup
 
-1. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+1. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-2. Configure Discord bot token:
-```bash
-cp .env.example .env
-# Edit .env and add your bot token
-```
-
-3. Get a Discord bot token:
-   - Go to https://discord.com/developers/applications
-   - Create an application
-   - Go to Bot -> Reset Token
-   - Go to OAuth2 -> URL Generator
-   - Select scope: `bot`
-   - Select permissions: `Send Messages`, `Read Message History`, `Use Slash Commands`
-   - Use the generated URL to invite the bot to your server
+2. **Setup LM Studio**:
+   - Open LM Studio app
+   - Download a model (e.g., Qwen3, Llama 3.2)
+   - Click "Start Server" (local HTTP server at port 1234)
 
 ## Running
 
-### Discord Bot
 ```bash
-cd expense-tracker
-python -m bot.main
+python -m bot.cli
 ```
-
-### Streamlit App
-```bash
-cd expense-tracker
-streamlit run app/app.py
-```
-
-The app will be available at http://localhost:8501
 
 ## Usage
 
-### Discord Commands
+Type naturally to add expenses/income:
 
-- **Add expense**: `@bot spent $50 on lunch`
-- **Add income**: `@bot received $100 from freelance`
-- **List transactions**: `/list`
-- **Add category**: `/add-category Grocery`
-- **List categories**: `/categories`
-- **Remove category**: `/remove-category Other`
-- **Summary**: `/summary`
-
-### Streamlit App
-
-Navigate through tabs:
-- Dashboard: Overview with pie charts
-- Trends: Line charts and monthly trends
-- Categories: Bar charts by category
-- Transactions: Filterable table
-- Export: Download CSV
+```
+→ Spent $50 on lunch
+→ Got $100 from freelance yesterday
+→ Paid $200 for bills
+→ Show my expenses
+→ What's my balance?
+→ help
+```
 
 ## Project Structure
 
 ```
-expense-tracker/
+expense-tracker-terminal/
 ├── bot/
-│   ├── main.py         # Bot entry point
-│   ├── cog.py           # Commands
-│   ├── parser.py       # NLP parser
-│   ├── database.py    # DB operations
-│   └── config.py      # Configuration
+│   ├── cli.py          # Terminal interface
+│   ├── llm_client.py  # LM Studio API client
+│   └── database.py    # SQLite operations
 ├── app/
-│   ├── app.py         # Streamlit app
-│   └── queries.py     # DB queries
+│   ├── app.py         # Streamlit dashboard
+│   └── queries.py    # DB queries
 ├── data/
-│   └── expenses.db    # SQLite database
-├── requirements.txt
-└── .env
+│   └── expenses.db   # SQLite database
+└── requirements.txt
 ```
+
+## Using Streamlit Dashboard
+
+```bash
+streamlit run app/app.py
+```
+
+The app will be at http://localhost:8501
