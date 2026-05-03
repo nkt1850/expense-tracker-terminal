@@ -155,4 +155,4 @@ streamlit run app/app.py
 ### LM Studio
 - Open LM Studio app
 - Load model (Qwen3 recommended)
-- Start Server (Developer tab)
+- Start Server (Developer tab)# iOS Mobile Implementation
